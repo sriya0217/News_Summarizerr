@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Summarizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                        url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+
+        textarea, input[type="file"] {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        textarea:focus, input[type="file"]:focus {
+            outline: 2px solid #00cec9;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #00cec9, #0984e3);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px #00cec9;
+        }
+
+        .file-info {
+            font-size: 14px;
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .summary {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            line-height: 1.6;
+            color: #fff;
+        }
+
+        h3 {
+            margin-top: 30px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📰 News Summarizer</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="article">Paste News Article:</label>
+            <textarea name="article" placeholder="Paste your news article here..."></textarea>
+
+            <label for="file">Or Upload File (Image, PDF, DOCX, TXT):</label>
+            <input type="file" name="file">
+
+            {% if filename %}
+                <p class="file-info">📎 Uploaded File: <strong>{{ filename }}</strong></p>
+            {% endif %}
+
+            <input type="submit" value="🧠 Generate Summary">
+        </form>
+
+        {% if summary %}
+            <h3>📝 Summary</h3>
+            <div class="summary">
+                {{ summary }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
